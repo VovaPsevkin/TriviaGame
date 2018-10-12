@@ -1,0 +1,32 @@
+use master
+Drop Database TriviaQuestions
+
+insert into Difficulty(Difficulty)
+values('hard')
+
+insert into Questions(Question)
+values('What')
+
+insert into Questions(Question)
+values('Why')
+
+insert into Questions(Question)
+values('Where')
+
+select * from Categories
+SELECT * FROM Questions
+select * from Difficulty
+
+---how to create same records in my tables
+UPDATE Questions
+SET CategoryId=(SELECT CategoryId
+  FROM Categories)
+
+UPDATE Questions
+SET Questions.DifficultyID=(SELECT DifficultyID
+  FROM Difficulty)
+
+---how to insert new record in my table if not exists
+insert into Difficulty (Difficulty)
+ Select 'hard' Where not exists(select * from Difficulty where Difficulty='hard')
+
