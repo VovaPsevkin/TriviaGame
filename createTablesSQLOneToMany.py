@@ -52,7 +52,7 @@ class CreateTableInSQLServer(AbsractCreateTable):
         sql_query_difficulty = f"""DROP TABLE IF EXISTS Difficulties
                                    CREATE TABLE Difficulties(
                                    DifficultyID INT IDENTITY CONSTRAINT pk_difficultyId PRIMARY KEY,
-                                   Difficulty NVARCHAR(120) CONSTRAINT nt_questionType NOT NULL,
+                                   Difficulty NVARCHAR(120) CONSTRAINT nt_questionType NOT NULL
                                   )"""
         cursor.execute(sql_query_difficulty)
         connection.commit()

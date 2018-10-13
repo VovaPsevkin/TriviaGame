@@ -1,0 +1,79 @@
+USE TriviaQuestions
+GO
+
+DROP TABLE IF EXISTS Questions
+CREATE TABLE Questions
+(
+	QuestionId INT IDENTITY CONSTRAINT pk_uestionId PRIMARY KEY,
+	Question NVARCHAR(150) CONSTRAINT nt_question NOT NULL
+)
+GO
+
+DROP TABLE IF EXISTS Difficulties
+CREATE TABLE Difficulties
+(
+	DifficultyID INT IDENTITY CONSTRAINT pk_difficultyId PRIMARY KEY,
+    Difficulty NVARCHAR(20) CONSTRAINT nt_difficultType NOT NULL
+)
+GO
+
+DROP TABLE IF EXISTS DifficultiesQuestions
+CREATE TABLE DifficultiesQuestions
+(
+	QuestionID INT NOT NULL CONSTRAINT fk_questionID FOREIGN KEY REFERENCES Questions(QuestionId),
+	DifficultyID INT NOT NULL  CONSTRAINT fk_difficultyID FOREIGN KEY REFERENCES Difficulties(DifficultyID),
+	PRIMARY KEY CLUSTERED (QuestionID,DifficultyID)
+)
+GO
+
+DROP TABLE IF EXISTS Categories
+CREATE TABLE Categories
+(
+	CategoryId INT IDENTITY CONSTRAINT pk_categoryId PRIMARY KEY,
+    Category NVARCHAR(50) CONSTRAINT nt_category NOT NULL
+)
+GO
+
+DROP TABLE IF EXISTS CategoriesQuestions
+CREATE TABLE CategoriesQuestions
+(
+	QuestionID INT NOT NULL CONSTRAINT fk_catquestionID FOREIGN KEY REFERENCES Questions(QuestionId),
+	CategoryId INT NOT NULL  CONSTRAINT fk_categoryId FOREIGN KEY REFERENCES Categories(CategoryId),
+	PRIMARY KEY CLUSTERED (QuestionID,CategoryId)
+)
+GO
+
+DROP TABLE IF EXISTS QTypes
+CREATE TABLE QTypes
+(
+	TypeId INT IDENTITY CONSTRAINT pk_typeId PRIMARY KEY,
+    QuestionType NVARCHAR(120) CONSTRAINT nt_questionType NOT NULL
+)
+GO
+
+DROP TABLE IF EXISTS TypesQuestions
+CREATE TABLE TypesQuestions
+(
+	QuestionID INT NOT NULL CONSTRAINT fk_typequestionID FOREIGN KEY REFERENCES Questions(QuestionId),
+	TypeId INT NOT NULL  CONSTRAINT fk_typeId FOREIGN KEY REFERENCES QTypes(TypeId),
+	PRIMARY KEY CLUSTERED (QuestionID,TypeId)
+)
+GO
+
+DROP TABLE IF EXISTS Answers
+CREATE TABLE Answers
+(
+	AnswersId INT IDENTITY CONSTRAINT pk_answersId PRIMARY KEY,
+	QuestionCorrectAnswer NVARCHAR(150) CONSTRAINT d_questionCorrect DEFAULT NULL,
+	QuestionIncorrectAnswer NVARCHAR(150) CONSTRAINT nt_questionIncorrectAnswers NOT NULL
+)
+GO
+
+DROP TABLE IF EXISTS AnswersQuestions
+CREATE TABLE AnswersQuestions
+(
+	QuestionID INT NOT NULL CONSTRAINT fk_ansquestionID FOREIGN KEY REFERENCES Questions(QuestionId),
+	AnswersId INT NOT NULL  CONSTRAINT fk_answersId FOREIGN KEY REFERENCES Answers(AnswersId),
+	PRIMARY KEY CLUSTERED (QuestionID,AnswersId)
+)
+GO

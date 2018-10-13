@@ -1,5 +1,5 @@
 from singletonCreateSQLdb import CreateSQL_DB
-from createTableSQL import CreateTableInSQLServer
+from createTablesSQLOneToMany import CreateTableInSQLServer
 from insertDataTableSQL import InsertDataToTableSqlServer
 from downloadData import DownloadJsonFile
 

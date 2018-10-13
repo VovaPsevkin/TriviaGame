@@ -1,0 +1,65 @@
+CREATE PROCEDURE spInsertINToQuestionsDifficulties
+@Question NVARCHAR(150), 
+@Difficulty NVARCHAR(50),
+@Category NVARCHAR(50),
+@Type NVARCHAR(50),
+@Correct NVARCHAR(50),
+@InCorrect NVARCHAR(50)
+AS
+BEGIN
+	DECLARE @QuestionID INT
+	DECLARE @DifficultyID INT
+	DECLARE @CategoryID INT
+	DECLARE @TypeID INT
+	DECLARE @AnswerID INT
+
+
+	SELECT @QuestionID = QuestionID FROM Questions WHERE Question = @Question
+	IF(@QuestionID IS NULL )
+	BEGIN
+		INSERT INTO Questions VALUES(@Question)
+		SELECT @QuestionID = SCOPE_IDENTITY()
+	END
+
+	SELECT @DifficultyID = DifficultyID FROM DIFficulties WHERE Difficulty = @Difficulty
+	IF(@DifficultyID IS NULL )
+	BEGIN
+		INSERT INTO DIFficulties VALUES(@Difficulty)
+		SELECT @DifficultyID = SCOPE_IDENTITY()
+	END
+
+	SELECT @CategoryID = CategoryID FROM Categories WHERE Category = @Category
+	IF(@CategoryID IS NULL )
+	BEGIN
+		INSERT INTO Categories VALUES(@Category)
+		SELECT @CategoryID = SCOPE_IDENTITY()
+	END
+
+	SELECT @TypeID = TypeId FROM QTypes WHERE QuestionType = @Type
+	IF(@TypeID IS NULL )
+	BEGIN
+		INSERT INTO QTypes VALUES(@Type)
+		SELECT @TypeID = SCOPE_IDENTITY()
+	END
+
+	SELECT @AnswerID = AnswersId FROM Answers
+	WHERE (QuestionCorrectAnswer = @Correct AND QuestionIncorrectAnswer = @InCorrect)
+		OR (QuestionCorrectAnswer IS NULL AND QuestionIncorrectAnswer = @InCorrect)
+	IF(@AnswerID IS NULL )
+	BEGIN
+		INSERT INTO Answers VALUES(@Correct, @InCorrect)
+		SELECT @AnswerID = SCOPE_IDENTITY()
+	END
+
+
+	INSERT INTO AnswersQuestions VALUES(@QuestionID, @AnswerID)
+	INSERT INTO CategoriesQuestions VALUES(@QuestionID, @CategoryID)
+	INSERT INTO DifficultiesQuestions VALUES(@QuestionID, @DifficultyID)
+	INSERT INTO TypesQuestions VALUES(@QuestionID, @TypeID)
+
+END
+
+
+
+
+

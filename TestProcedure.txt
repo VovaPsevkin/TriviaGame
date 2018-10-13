@@ -1,0 +1,25 @@
+USE TriviaQuestions
+SELECT * FROM Questions
+SELECT * FROM Answers
+SELECT * FROM AnswersQuestions
+
+EXECUTE spInsertINToQuestionsDifficulties 'WHERE','HARD', 'B', 'MULTI','Yes', 'No'
+EXECUTE spInsertINToQuestionsDifficulties 'WHAT','HARD', 'A','MULTI', NULL, 'No'
+EXECUTE spInsertINToQuestionsDifficulties 'WHY','EASY', 'C', 'MULTI',NULL,'Yes'
+EXECUTE spInsertINToQuestionsDifficulties 'WHO','normal', 'A','BOOL', NULl, 'NO'
+EXECUTE spInsertINToQuestionsDifficulties 'WHO','normal', 'B', 'MULTI', 'Yes', 'NO'
+
+
+DROP TABLE AnswersQuestions
+DROP TABLE CategoriesQuestions
+DROP TABLE DifficultiesQuestions
+DROP TABLE TypesQuestions
+DROP TABLE Answers
+DROP TABLE Categories
+DROP TABLE QTypes
+DROP TABLE Difficulties
+DROP TABLE Questions
+
+
+
+

@@ -1,7 +1,7 @@
 import pyodbc
 from singletonCreateSQLdb import CreateSQL_DB
 from downloadData import DownloadJsonFile
-from createTablesSQL import CreateTableInSQLServer
+from createTablesSQLOneToMany import CreateTableInSQLServer
 
 
 class InsertDataToTableSqlServer:

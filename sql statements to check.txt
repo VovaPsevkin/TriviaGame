@@ -23,7 +23,7 @@ SET CategoryId=(SELECT CategoryId
   FROM Categories)
 
 UPDATE Questions
-SET Questions.DifficultyID=(SELECT DifficultyID
+SET DifficultyID=(SELECT DifficultyID
   FROM Difficulty)
 
 ---how to insert new record in my table if not exists
