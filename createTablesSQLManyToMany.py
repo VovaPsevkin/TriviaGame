@@ -1,7 +1,7 @@
 import pyodbc
 
 from abstractCeateTable import AbsractCreateTable
-from singletonCreateSQLdb import CreateSQL_DB
+from singletonCreateSQLDB import CreateSQLDB
 
 
 class CreateTableInSQLServer(AbsractCreateTable):
@@ -117,19 +117,19 @@ class CreateTableInSQLServer(AbsractCreateTable):
         connection.commit()
 
 if __name__ == '__main__':
-    # connection_string = "Driver={ODBC Driver 13 for SQL Server};" \
-    #                     "Server=EXPERISDS1\SQLSERVER2017;" \
-    #                     "Database=TriviaQuestions;" \
-    #                     "Trusted_Connection=yes;"
-
     connection_string = "Driver={ODBC Driver 13 for SQL Server};" \
-                        "Server=DESKTOP-7DM81V0;" \
+                        "Server=EXPERISDS1\SQLSERVER2017;" \
                         "Database=TriviaQuestions;" \
                         "Trusted_Connection=yes;"
 
+    # connection_string = "Driver={ODBC Driver 13 for SQL Server};" \
+    #                     "Server=DESKTOP-7DM81V0;" \
+    #                     "Database=TriviaQuestions;" \
+    #                     "Trusted_Connection=yes;"
+
     try:
-        CreateSQL_DB(db_name='TriviaQuestions')
+        CreateSQLDB(db_name='TriviaQuestions')
     except Exception:
         print("Database TriviaQuestions already exists")
-    CreateTableInSQLServer().create_table(conn_str=connection_string)
-    #CreateTableInSQLServer().drop_tables(conn_str=connection_string)
+    #CreateTableInSQLServer().create_table(conn_str=connection_string)
+    CreateTableInSQLServer().drop_tables(conn_str=connection_string)
