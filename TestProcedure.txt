@@ -21,5 +21,17 @@ DROP TABLE Difficulties
 DROP TABLE Questions
 
 
+/* Get Questions and Answers */
+use TriviaQuestions
+select Q.Question,
+	   A.QuestionCorrectAnswer,
+	   A.QuestionIncorrectAnswer
+from Questions as Q
+inner join AnswersQuestions as AQ
+on Q.QuestionId = AQ.QuestionID
+inner join Answers as A
+on AQ.AnswersId = A.AnswersId
+
+
 
 

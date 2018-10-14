@@ -1,4 +1,4 @@
-CREATE PROCEDURE InsertIintoTables
+CREATE PROCEDURE InsertIntoTables
 @Question NVARCHAR(150), 
 @Difficulty NVARCHAR(50),
 @Category NVARCHAR(50),
